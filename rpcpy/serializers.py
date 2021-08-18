@@ -53,6 +53,9 @@ class JSONSerializer(BaseSerializer):
         ).encode("utf8")
 
     def decode(self, data: bytes) -> typing.Any:
+        if not data:
+            return
+
         return json.loads(
             data.decode("utf8"),
             object_hook=self.default_decode,
